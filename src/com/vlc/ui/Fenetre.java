@@ -16,32 +16,41 @@ import java.awt.event.ComponentEvent;
  */
 class Fenetre extends JFrame {
 
+        PrincipalPan pp;
     public Fenetre(String titre) {
-        final PrincipalPan pp = new PrincipalPan();
+        pp = new PrincipalPan();
         setContentPane(pp);
         setTitle(titre);
-        setLocationRelativeTo(null);
         setDefaultCloseOperation(3);
         setSize(570, 120);
+        setLocationRelativeTo(null);
         setVisible(true);
+        //pack();
         addComponentListener(new ComponentAdapter() {
 
             @Override
             public void componentResized(ComponentEvent e) {
-                int H=120;
-                if(getHeight()>120){
-                    H=getHeight();
+                int H = 120;
+                int W = 570;
+                if (getHeight() > 250) {
+                    H = getHeight();
                     pp.setSouthPan(true);
-                }else{
-                    H=120;
+                    
+                    //pp.add(new SouthPan(), BorderLayout.CENTER);
+                } else {
+                    H = 120;
                     pp.setSouthPan(false);
                 }
-                setSize(new Dimension(getWidth(),H));
+                if(getWidth() < 570) {
+                    W = 570;
+                } else {
+                    W = getWidth();
+                }
+                setSize(new Dimension(W, H));
                 super.componentResized(e);
             }
 
         });
     }
-
 
 }
