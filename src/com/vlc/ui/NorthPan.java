@@ -16,14 +16,25 @@ import java.awt.*;
 public class NorthPan extends JPanel {
     private ControlPan cp;
     private ProgressPan pp;
-    public NorthPan() {
+
+    private PrincipalPan principalPan;
+    public NorthPan(PrincipalPan principalPan) {
+        this.principalPan=principalPan;
         cp= new ControlPan();
-        pp = new ProgressPan();
+        pp = new ProgressPan(this);
         setLayout(new BorderLayout());
         add(cp, BorderLayout.WEST);
         JPanel pan = new JPanel(new BorderLayout());
         pan.add(pp, BorderLayout.NORTH);
         add(pan, BorderLayout.CENTER);
+
+    }
+    public PrincipalPan getPrincipalPan() {
+        return principalPan;
+    }
+
+    public void setPrincipalPan(PrincipalPan principalPan) {
+        this.principalPan = principalPan;
     }
     public ProgressPan getPp() {
         return pp;

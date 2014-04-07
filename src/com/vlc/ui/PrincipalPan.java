@@ -19,13 +19,14 @@ public class PrincipalPan extends JPanel {
         setLayout(new BorderLayout());
         st = new SouthPan();
         st.setVisible(false);
-        nt = new NorthPan();
-        this.add(st, BorderLayout.CENTER);
+        nt = new NorthPan(this);
         this.add(nt, BorderLayout.NORTH);
+        this.add(st, BorderLayout.SOUTH);
 
     }
     public void setSouthPan(boolean b) {
         st.setVisible(b);
         nt.getPp().getControlPan().setPlaylist(b);
     }
+
 }

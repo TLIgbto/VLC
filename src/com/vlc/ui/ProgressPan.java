@@ -9,6 +9,8 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -17,9 +19,11 @@ import java.awt.*;
 public class ProgressPan extends JPanel {
     private Display display;
     private ControlPanDown controlPan;
-    public ProgressPan() {
+    private NorthPan nt;
+    public ProgressPan(NorthPan nt) {
+        this.nt=nt;
         display= new Display();
-        controlPan = new ControlPanDown();
+        controlPan = new ControlPanDown(nt);
         setLayout(new BorderLayout());
         add(display);
         add(controlPan, BorderLayout.SOUTH);
@@ -36,13 +40,15 @@ public class ProgressPan extends JPanel {
     }
 }
 
-class ControlPanDown extends JPanel {
+class ControlPanDown extends JPanel implements ActionListener {
 
     private static final int WIDTH = 20;
     private static final int HEIGHT = 15;
     private JToggleButton playlist;
+    private NorthPan nt;
 
-    public ControlPanDown() {
+    public ControlPanDown(NorthPan nt) {
+        this.nt=nt;
         setLayout(new BorderLayout());
         JPanel volPan = new JPanel();
         JPanel settings = new JPanel();
@@ -63,6 +69,8 @@ class ControlPanDown extends JPanel {
         playlist = new JToggleButton();
         icon = new ImageIcon("icons/menu.png");
         playlist.setIcon(icon);
+        playlist.setSelected(false);
+        playlist.addActionListener(this);
         volPan.add(mute);
         volPan.add(volSlider);
         volPan.add(high);
@@ -74,6 +82,23 @@ class ControlPanDown extends JPanel {
 
     public void setPlaylist(boolean b){
         playlist.setSelected(b);
+    }
+
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+      if(playlist.isSelected()){
+          this.nt.getPrincipalPan().setSouthPan(false);
+          //setSize(new Dimension(getWidth(),120));
+      }else {
+          this.nt.getPrincipalPan().setSouthPan(true);
+          //setSize(new Dimension(getWidth(),301));
+      }
     }
 }
 

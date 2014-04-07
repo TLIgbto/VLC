@@ -8,12 +8,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class FileChooserEditor extends JFileChooser {
 
-    private TreeTabPan tab;
+    private JPanel tab;
     private JFileChooser chooser;
     private FileNameExtensionFilter filter;
     private String path;
 
-    public FileChooserEditor(TreeTabPan tab) {
+    public FileChooserEditor(JPanel tab) {
         this.tab = tab;
         chooser = new JFileChooser();
         filter = new FileNameExtensionFilter("mp3", "mpeg", "avi");
