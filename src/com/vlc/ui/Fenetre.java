@@ -5,10 +5,10 @@
  */
 package com.vlc.ui;
 
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import javax.swing.JFrame;
 
 /**
  *
@@ -17,20 +17,31 @@ import javax.swing.JFrame;
 class Fenetre extends JFrame {
 
     public Fenetre(String titre) {
-        setContentPane(new PrincipalPan());
+        final PrincipalPan pp = new PrincipalPan();
+        setContentPane(pp);
         setTitle(titre);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(3);
-        setSize(570, 100);
+        setSize(570, 120);
         setVisible(true);
         addComponentListener(new ComponentAdapter() {
 
             @Override
             public void componentResized(ComponentEvent e) {
-                setSize(new Dimension(getWidth(), 120));
+                int H=120;
+                if(getHeight()>120){
+                    H=getHeight();
+                    pp.setSouthPan(true);
+                }else{
+                    H=120;
+                    pp.setSouthPan(false);
+                }
+                setSize(new Dimension(getWidth(),H));
                 super.componentResized(e);
             }
 
         });
     }
+
+
 }

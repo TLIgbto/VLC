@@ -5,17 +5,27 @@
  */
 package com.vlc.ui;
 
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  *
  * @author toure
  */
 public class PrincipalPan extends JPanel {
-
+    private SouthPan st;
+    private NorthPan nt;
     public PrincipalPan() {
         setLayout(new BorderLayout());
-        add(new NorthPan());
+        st = new SouthPan();
+        st.setVisible(false);
+        nt = new NorthPan();
+        this.add(st, BorderLayout.CENTER);
+        this.add(nt, BorderLayout.NORTH);
+
+    }
+    public void setSouthPan(boolean b) {
+        st.setVisible(b);
+        nt.getPp().getControlPan().setPlaylist(b);
     }
 }

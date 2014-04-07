@@ -6,21 +6,30 @@
 
 package com.vlc.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  *
  * @author toure
  */
 public class NorthPan extends JPanel {
+    private ControlPan cp;
+    private ProgressPan pp;
     public NorthPan() {
-        setBackground(Color.YELLOW);
+        cp= new ControlPan();
+        pp = new ProgressPan();
         setLayout(new BorderLayout());
-        add(new ControlPan(), BorderLayout.WEST);
+        add(cp, BorderLayout.WEST);
         JPanel pan = new JPanel(new BorderLayout());
-        pan.add(new ProgressPan(), BorderLayout.NORTH);
+        pan.add(pp, BorderLayout.NORTH);
         add(pan, BorderLayout.CENTER);
+    }
+    public ProgressPan getPp() {
+        return pp;
+    }
+
+    public void setPp(ProgressPan pp) {
+        this.pp = pp;
     }
 }

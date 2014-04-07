@@ -5,31 +5,32 @@
  */
 package com.vlc.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Insets;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JSlider;
+import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+import java.awt.*;
 
 /**
  *
  * @author toure
  */
 public class ProgressPan extends JPanel {
-
+    private Display display;
+    private ControlPanDown controlPan;
     public ProgressPan() {
+        display= new Display();
+        controlPan = new ControlPanDown();
         setLayout(new BorderLayout());
-        add(new Display());
-        add(new ControlPanDown(), BorderLayout.SOUTH);
+        add(display);
+        add(controlPan, BorderLayout.SOUTH);
+    }
+    public ControlPanDown getControlPan() {
+        return controlPan;
     }
 
+    public void setControlPan(ControlPanDown controlPan) {
+        this.controlPan = controlPan;
+    }
     public Insets getInsets() {
         return (new Insets(5, 10, 5, 10));
     }
@@ -39,6 +40,7 @@ class ControlPanDown extends JPanel {
 
     private static final int WIDTH = 20;
     private static final int HEIGHT = 15;
+    private JToggleButton playlist;
 
     public ControlPanDown() {
         setLayout(new BorderLayout());
@@ -58,7 +60,7 @@ class ControlPanDown extends JPanel {
         JButton equalizer = new JButton();
         icon = new ImageIcon("icons/equalizer.png");
         equalizer.setIcon(icon);
-        JButton playlist = new JButton();
+        playlist = new JToggleButton();
         icon = new ImageIcon("icons/menu.png");
         playlist.setIcon(icon);
         volPan.add(mute);
@@ -68,6 +70,10 @@ class ControlPanDown extends JPanel {
         settings.add(playlist);
         add(volPan, BorderLayout.WEST);
         add(settings, BorderLayout.EAST);
+    }
+
+    public void setPlaylist(boolean b){
+        playlist.setSelected(b);
     }
 }
 
