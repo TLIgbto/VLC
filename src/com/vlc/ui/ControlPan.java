@@ -6,20 +6,17 @@
 
 package com.vlc.ui;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JToggleButton;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 /**
  *
  * @author toure
  */
-public class ControlPan extends JPanel {
+public class ControlPan extends JPanel implements ActionListener {
     
     private JButton rewind;
     private JToggleButton pp;
@@ -37,6 +34,7 @@ public class ControlPan extends JPanel {
         rewind.setPreferredSize(new Dimension(WIDTH, HEIGTH));
         pp = new JToggleButton();
         icon = new ImageIcon("icons/play.png");
+        pp.addActionListener(this);
         pp.setIcon(icon);
         pp.setPreferredSize(new Dimension(WIDTH, HEIGTH + 10));
         forward = new JButton();
@@ -67,5 +65,21 @@ public class ControlPan extends JPanel {
     }
     public Insets getInsets() {
         return (new Insets(5, 0, 5, 0));
-    }  
+    }
+
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(pp.isSelected()){
+            ImageIcon icon = new ImageIcon("icons/pause.png");
+            pp.setIcon(icon);
+        }else{
+            ImageIcon icon = new ImageIcon("icons/play.png");
+            pp.setIcon(icon);
+        }
+    }
 }

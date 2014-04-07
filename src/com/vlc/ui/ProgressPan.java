@@ -20,6 +20,15 @@ public class ProgressPan extends JPanel {
     private Display display;
     private ControlPanDown controlPan;
     private NorthPan nt;
+
+    public NorthPan getNt() {
+        return nt;
+    }
+
+    public void setNt(NorthPan nt) {
+        this.nt = nt;
+    }
+
     public ProgressPan(NorthPan nt) {
         this.nt=nt;
         display= new Display();
@@ -93,11 +102,12 @@ class ControlPanDown extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
       if(playlist.isSelected()){
-          this.nt.getPrincipalPan().setSouthPan(false);
-          //setSize(new Dimension(getWidth(),120));
-      }else {
+          System.out.println("ok");
           this.nt.getPrincipalPan().setSouthPan(true);
-          //setSize(new Dimension(getWidth(),301));
+          this.nt.getPrincipalPan().getMain().setSize(new Dimension(this.nt.getPrincipalPan().getMain().getWidth(),300));
+      }else {
+          this.nt.getPrincipalPan().setSouthPan(false);
+          this.nt.getPrincipalPan().getMain().setSize(new Dimension(this.nt.getPrincipalPan().getMain().getWidth(),120));
       }
     }
 }
